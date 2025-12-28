@@ -12,35 +12,43 @@
   <meta http-equiv="Expires" content="0"/>
 
   <style>
+    /* ✅ LÜKS TEMA: Siyah + Altın + Hafif Mor Vurgu */
     :root{
-      --bg:#05060c;
-      --panel:#0b1224;
-      --panel2:#0f172a;
-      --text:#e5e7eb;
-      --muted:#9aa6b2;
-      --brand:#5865F2;
-      --border:rgba(255,255,255,.10);
-      --shadow:0 16px 50px rgba(0,0,0,.55);
+      --bg:#06060a;            /* ana arka plan */
+      --bg2:#0b0b12;           /* gradient ikinci ton */
+      --panel:#0f0f18;         /* kart/panel */
+      --panel2:#121221;        /* hover/ikinci panel */
+      --text:#f2f2f4;          /* yazı */
+      --muted:#b6b6c3;         /* ikincil yazı */
+      --gold:#d6b25e;          /* altın vurgu */
+      --gold2:#f1d38a;         /* altın parlak */
+      --accent:#7c3aed;        /* mor vurgu (çok az) */
+      --border:rgba(214,178,94,.20);
+      --border2:rgba(255,255,255,.10);
+      --shadow:0 18px 60px rgba(0,0,0,.65);
       --r:18px;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
       background:
-        radial-gradient(900px 450px at 18% 0%, rgba(88,101,242,.20), transparent 60%),
-        linear-gradient(180deg, #02030a, var(--bg));
+        radial-gradient(900px 450px at 18% 0%, rgba(214,178,94,.12), transparent 60%),
+        radial-gradient(700px 380px at 82% 10%, rgba(124,58,237,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
       min-height:100vh;
     }
     a{color:inherit;text-decoration:none}
     .wrap{max-width:980px;margin:0 auto;padding:20px}
+
     .nav{
       display:flex;align-items:center;justify-content:space-between;gap:10px;
       padding:12px 14px;
       border:1px solid var(--border);
       border-radius:999px;
-      background:rgba(15,23,42,.55);
+      background:rgba(18,18,33,.55);
       backdrop-filter: blur(10px);
       box-shadow:var(--shadow);
       position:sticky; top:12px; z-index:5;
@@ -48,98 +56,132 @@
     .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.6px}
     .logo{
       width:36px;height:36px;border-radius:14px;
-      background:linear-gradient(135deg,#5865F2,#06b6d4);
+      background:linear-gradient(135deg, var(--gold), var(--gold2));
       display:grid;place-items:center;
-      box-shadow:0 0 0 6px rgba(88,101,242,.14);
+      box-shadow:0 0 0 6px rgba(214,178,94,.10);
       font-size:13px;
+      color:#221a08;
     }
     .links{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
     .chip{
       padding:9px 11px;
-      border:1px solid var(--border);
+      border:1px solid rgba(255,255,255,.12);
       border-radius:999px;
-      background:rgba(15,23,42,.35);
+      background:rgba(15,15,24,.35);
       color:var(--muted);
       font-weight:800;
       font-size:13px;
+      transition:.2s;
     }
-    .chip:hover{color:var(--text);border-color:rgba(255,255,255,.22)}
+    .chip:hover{
+      color:var(--text);
+      border-color:rgba(214,178,94,.35);
+      transform:translateY(-1px);
+    }
+
     .hero{
       margin-top:14px;
       padding:28px;
       border-radius:var(--r);
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(15,23,42,.75), rgba(15,23,42,.35));
+      border:1px solid rgba(214,178,94,.22);
+      background:linear-gradient(180deg, rgba(18,18,33,.75), rgba(18,18,33,.35));
       box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
     }
+    .hero:after{
+      content:"";
+      position:absolute; inset:-120px -140px auto auto;
+      width:340px;height:340px;
+      background:radial-gradient(circle at 30% 30%, rgba(214,178,94,.22), transparent 60%);
+      filter:blur(2px);
+      transform:rotate(12deg);
+      pointer-events:none;
+    }
+
     .kicker{color:var(--muted);font-weight:900;letter-spacing:.4px;font-size:13px}
     h1{margin:10px 0 10px;font-size:36px;line-height:1.1}
-    .sub{margin:0;max-width:760px;color:var(--muted);line-height:1.7}
+    .sub{margin:0;max-width:760px;color:var(--muted);line-height:1.75}
+
     .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
     .btn{
       display:inline-flex;align-items:center;justify-content:center;gap:10px;
       padding:12px 14px;border-radius:14px;
       border:1px solid rgba(255,255,255,.14);
-      background:rgba(15,23,42,.55);
+      background:rgba(15,15,24,.55);
       color:var(--text); font-weight:900;
       cursor:pointer; user-select:none;
-      transition:transform .08s ease, border-color .2s ease;
+      transition:transform .08s ease, border-color .2s ease, background .2s ease;
     }
-    .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.26)}
+    .btn:hover{transform:translateY(-1px);border-color:rgba(214,178,94,.35)}
     .btn.primary{
-      background:linear-gradient(135deg, rgba(88,101,242,.95), rgba(6,182,212,.55));
-      border-color:rgba(88,101,242,.65);
+      background:linear-gradient(135deg, rgba(214,178,94,.95), rgba(241,211,138,.55));
+      border-color:rgba(214,178,94,.55);
+      color:#241b08;
     }
 
     section{margin-top:16px}
     .panel{
       padding:18px;border-radius:var(--r);
-      border:1px solid var(--border);
-      background:rgba(11,18,36,.55);
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(15,15,24,.55);
       box-shadow:var(--shadow);
     }
     .title{margin:0 0 10px;font-size:18px}
+
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
     .card{
       grid-column:span 6;
       padding:14px;border-radius:16px;
-      border:1px solid var(--border);
-      background:rgba(15,23,42,.35);
+      border:1px solid rgba(214,178,94,.18);
+      background:linear-gradient(180deg, rgba(18,18,33,.55), rgba(15,15,24,.35));
+      transition:.2s;
+    }
+    .card:hover{
+      transform:translateY(-1px);
+      border-color:rgba(214,178,94,.35);
     }
     .card h3{margin:0 0 6px;font-size:15px}
-    .card p{margin:0;color:var(--muted);line-height:1.6;font-size:14px}
-    ul{margin:8px 0 0;padding-left:18px;color:var(--muted);line-height:1.9}
+    .card p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
 
-    label{display:block;font-weight:900;font-size:13px;color:rgba(255,255,255,.85);margin:10px 0 6px}
-    input, textarea, select{
+    ul{margin:8px 0 0;padding-left:18px;color:var(--muted);line-height:1.95}
+
+    label{display:block;font-weight:900;font-size:13px;color:rgba(242,242,244,.85);margin:10px 0 6px}
+    input, textarea{
       width:100%;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.22);
+      background:rgba(0,0,0,.25);
       color:var(--text);
       padding:12px;
       outline:none;
     }
     textarea{min-height:110px;resize:vertical}
-    input:focus, textarea:focus, select:focus{border-color:rgba(88,101,242,.65)}
+    input:focus, textarea:focus{border-color:rgba(214,178,94,.55)}
     .mini{font-size:12px;color:var(--muted);margin-top:8px}
 
     .copyBox{
       margin-top:12px;
       padding:12px;
       border-radius:14px;
-      border:1px solid var(--border);
-      background:rgba(0,0,0,.22);
-      color:rgba(255,255,255,.9);
+      border:1px solid rgba(214,178,94,.22);
+      background:rgba(0,0,0,.25);
+      color:rgba(255,255,255,.92);
       white-space:pre-wrap;
       display:none;
     }
+
     .footer{
       margin:16px 0 6px;
       display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
       color:var(--muted);
     }
-    .pill{padding:8px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(15,23,42,.25)}
+    .pill{
+      padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(15,15,24,.35);
+    }
+
     @media (max-width:720px){
       h1{font-size:30px}
       .card{grid-column:span 12}
@@ -152,8 +194,8 @@
 
   <div class="nav">
     <div class="brand">
-      <div class="logo">BRDN</div>
-      <div>Bot Geliştirme</div>
+      <div class="logo">BR</div>
+      <div>BRDN • Bot Geliştirme</div>
     </div>
     <div class="links">
       <a class="chip" href="#hizmet">Hizmet</a>
@@ -163,7 +205,7 @@
   </div>
 
   <header class="hero">
-    <div class="kicker">⚡ Sunucuna özel • Kodlama • Stabil & temiz sistem</div>
+    <div class="kicker">✨ Özel bot • Kodlama • Stabil & temiz sistem</div>
     <h1>Discord Bot Geliştirme</h1>
     <p class="sub">
       Sunucuna/işine özel Discord bot geliştiriyorum. Hazır bot satmıyorum.
@@ -185,27 +227,27 @@
       <div class="grid">
         <div class="card">
           <h3>Slash Komutlar & Paneller</h3>
-          <p>Discord slash komutları, buton/menü panelleri, kullanıcı dostu akış.</p>
+          <p>Slash komut, buton/menü panelleri, kullanıcı dostu akışlar.</p>
         </div>
         <div class="card">
-          <h3>Otomasyon & Rol Sistemleri</h3>
-          <p>Otomatik rol verme, kayıt akışı, belirli kurallara göre otomatik işlemler.</p>
+          <h3>Otomasyon & Rol Akışları</h3>
+          <p>Kurallara göre otomatik rol/işlem, kayıt akışları, otomasyonlar.</p>
         </div>
         <div class="card">
-          <h3>Moderasyon Komutları</h3>
-          <p>Uyarı/timeout/ban, filtreler, loglama ve yönetim araçları.</p>
+          <h3>Moderasyon Araçları</h3>
+          <p>Timeout/ban, filtreler, loglama ve yönetim komutları.</p>
         </div>
         <div class="card">
-          <h3>Ticket / Destek Botu (Kodlama)</h3>
-          <p>İstersen tamamen özel ticket sistemi yazarım (panel, transcript, yetki akışı).</p>
+          <h3>Ticket Sistemi (Kodlama)</h3>
+          <p>İstersen özel ticket sistemi yazarım (panel, transcript, yetki akışı).</p>
         </div>
         <div class="card">
-          <h3>Veritabanı & Seviye Sistemi</h3>
-          <p>XP/level, ekonomi, kullanıcı verisi kayıtları (MongoDB/SQLite vb.).</p>
+          <h3>Veritabanı & Level</h3>
+          <p>Kullanıcı verisi, XP/level, ekonomi, kayıtlar (MongoDB/SQLite vb.).</p>
         </div>
         <div class="card">
           <h3>API Entegrasyonları</h3>
-          <p>Web API’leri, log/istatistik, dış servis bağlantıları (isteğe göre).</p>
+          <p>Dış servis bağlantıları, istatistik, web API (isteğe göre).</p>
         </div>
       </div>
     </div>
@@ -215,7 +257,7 @@
     <div class="panel">
       <h2 class="title">Süreç</h2>
       <ul>
-        <li>Sen ihtiyaçları yazarsın (hangi komutlar/sistemler, sunucu türü, hedef).</li>
+        <li>Sen ihtiyaçları yazarsın (hangi komutlar/sistemler, amaç).</li>
         <li>Ben kapsamı netleştiririm (ne yapılacak, nasıl çalışacak).</li>
         <li>Kodlama → test → teslim.</li>
         <li>Gerekirse düzenleme ve destek.</li>
@@ -253,7 +295,7 @@
 
   <div class="footer">
     <div class="pill">© <span id="year"></span> BRDN</div>
-    <div class="pill">Discord Bot Geliştirme</div>
+    <div class="pill">Premium Bot Development</div>
   </div>
 
 </div>
@@ -262,7 +304,7 @@
   document.getElementById("year").textContent = new Date().getFullYear();
 
   const quickText =
-`Selam BRDN! Sunucum için özel bot geliştirme istiyorum.
+`Selam BRDN! Özel Discord bot geliştirme istiyorum.
 Bot amacı: ...
 İstediğim özellikler: ...
 Sunucu büyüklüğü: ...
@@ -290,7 +332,7 @@ Not: ...`;
     const s = document.getElementById("size").value.trim() || "-";
 
     const text =
-`Selam BRDN! Sunucum için özel bot geliştirme istiyorum.
+`Selam BRDN! Özel Discord bot geliştirme istiyorum.
 
 Bot amacı: ${p}
 İstediğim özellikler: ${f}
@@ -315,4 +357,3 @@ Sunucu büyüklüğü: ${s}`;
 </script>
 </body>
 </html>
-
