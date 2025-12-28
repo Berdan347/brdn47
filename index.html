@@ -417,6 +417,71 @@
   opacity:1;
   transform:scale(1);
 }
+/* ====== KART HOVER LÜKS PARILTI ====== */
+.card{
+  position:relative;
+  overflow:hidden;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  inset:-60px -80px auto auto;
+  width:220px;
+  height:220px;
+  background:radial-gradient(circle at 30% 30%, rgba(214,178,94,.22), transparent 60%);
+  opacity:0;
+  transform:translate(30px,-20px);
+  transition:opacity .22s ease, transform .22s ease;
+  pointer-events:none;
+}
+
+.card:hover::after{
+  opacity:1;
+  transform:translate(0,0);
+}
+/* ====== SCROLL FADE-IN ====== */
+.reveal{
+  opacity:0;
+  transform:translateY(14px);
+  transition:opacity .55s ease, transform .55s ease;
+}
+
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
+/* ====== NAVBAR SHINE LINE ====== */
+.nav{
+  position:sticky; /* sende zaten var, yoksa ekli kalsın */
+  overflow:hidden;
+}
+
+.nav::after{
+  content:"";
+  position:absolute;
+  top:-40%;
+  left:-30%;
+  width:60%;
+  height:180%;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(214,178,94,.22),
+    transparent
+  );
+  transform:rotate(12deg) translateX(-120%);
+  opacity:.75;
+  pointer-events:none;
+  animation: navShine 6s ease-in-out infinite;
+}
+
+@keyframes navShine{
+  0%   { transform:rotate(12deg) translateX(-120%); opacity:.0; }
+  15%  { opacity:.75; }
+  35%  { transform:rotate(12deg) translateX(220%); opacity:.0; }
+  100% { transform:rotate(12deg) translateX(220%); opacity:.0; }
+}
 
   </style>
 </head>
@@ -638,6 +703,22 @@ Sunucu büyüklüğü: ${s}`;
       status.textContent = "Kopyalanmadı. Metni elle kopyalayabilirsin.";
     }
   });
+// Scroll fade-in
+const revealEls = document.querySelectorAll(".panel, .hero, .card");
+revealEls.forEach(el => el.classList.add("reveal"));
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+      io.unobserve(entry.target);
+    }
+  });
+  
+}, { threshold: 0.12 });
+
+revealEls.forEach(el => io.observe(el));
+
 </script>
 </body>
 </html>
