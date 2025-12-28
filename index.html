@@ -494,6 +494,70 @@
   line-height:1;
   filter: drop-shadow(0 0 6px rgba(214,178,94,.35));
 }
+/* ====== SVG İKON SİSTEMİ (PRO) ====== */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+
+.btn-icon{
+  width:18px;
+  height:18px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  transition: transform .18s ease;
+  filter: drop-shadow(0 0 8px rgba(214,178,94,.22));
+}
+
+.btn-icon svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+/* Hover’da ikon hafif dönsün */
+.btn:hover .btn-icon{
+  transform: rotate(-8deg) scale(1.04);
+}
+
+/* Mobilde ikonlar biraz büyüsün */
+@media (max-width:720px){
+  .btn-icon{ width:20px; height:20px; }
+}
+/* ====== BUTON SHINE SWEEP (PREMIUM) ====== */
+.btn{
+  position:relative;
+  overflow:hidden;
+}
+
+.btn::after{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-120%;
+  width:60%;
+  height:200%;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.35),
+    transparent
+  );
+  transform:rotate(12deg);
+  opacity:.0;
+  pointer-events:none;
+}
+
+.btn:hover::after{
+  opacity:.8;
+  animation: btnShine .7s ease;
+}
+
+@keyframes btnShine{
+  from{ left:-1
 
   </style>
 </head>
@@ -530,14 +594,25 @@
     </p>
 
     <div class="cta">
-      <a class="btn primary" href="https://discord.com/users/816990858515709962" target="_blank">
-  <span class="btn-icon">💬</span>
+<a class="btn primary" href="https://discord.com/users/816990858515709962" target="_blank">
+  <span class="btn-icon" aria-hidden="true">
+    <!-- Discord SVG -->
+    <svg viewBox="0 0 256 199" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M216.9 16.5A208.1 208.1 0 0 0 164.3 0c-2.3 4.1-4.9 9.6-6.7 13.9a193.9 193.9 0 0 0-58.9 0C96.9 9.6 94.2 4.1 91.9 0A207.9 207.9 0 0 0 39.2 16.5C5.3 67.5-3.9 117.3 0.7 166.4a210.3 210.3 0 0 0 64.2 32.6c5.2-7.1 9.8-14.7 13.8-22.7a133.8 133.8 0 0 1-21.8-10.5c1.8-1.3 3.6-2.7 5.3-4.1 42 19.6 87.6 19.6 129.1 0 1.7 1.4 3.5 2.8 5.3 4.1a133.3 133.3 0 0 1-21.8 10.5c4 8 8.6 15.6 13.8 22.7a210 210 0 0 0 64.2-32.6c6-56.9-10.3-106.2-39.9-149.9ZM85.3 135.8c-12.6 0-22.9-11.6-22.9-25.9s10.1-25.9 22.9-25.9c12.8 0 23.1 11.7 22.9 25.9 0 14.3-10.1 25.9-22.9 25.9Zm85.4 0c-12.6 0-22.9-11.6-22.9-25.9s10.1-25.9 22.9-25.9c12.8 0 23.1 11.7 22.9 25.9 0 14.3-10.1 25.9-22.9 25.9Z"/>
+    </svg>
+  </span>
   <span>Discord Profilim</span>
 </a>
 
 
+
       <button class="btn" id="copyQuick">
-  <span class="btn-icon">📋</span>
+  <span class="btn-icon" aria-hidden="true">
+    <!-- Copy SVG -->
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1Zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm0 16h-9V7h9v14Z"/>
+    </svg>
+  </span>
   <span>Hazır mesajı kopyala</span>
 </button>
 
