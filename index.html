@@ -482,6 +482,18 @@
   35%  { transform:rotate(12deg) translateX(220%); opacity:.0; }
   100% { transform:rotate(12deg) translateX(220%); opacity:.0; }
 }
+/* ====== BUTON İKON STİLİ ====== */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+
+.btn-icon{
+  font-size:15px;
+  line-height:1;
+  filter: drop-shadow(0 0 6px rgba(214,178,94,.35));
+}
 
   </style>
 </head>
@@ -519,10 +531,16 @@
 
     <div class="cta">
       <a class="btn primary" href="https://discord.com/users/816990858515709962" target="_blank">
+  <span class="btn-icon">💬</span>
   <span>Discord Profilim</span>
 </a>
 
-      <button class="btn" id="copyQuick">Hazır mesajı kopyala</button>
+
+      <button class="btn" id="copyQuick">
+  <span class="btn-icon">📋</span>
+  <span>Hazır mesajı kopyala</span>
+</button>
+
     </div>
 
     <div class="copyBox" id="quickBox"></div>
