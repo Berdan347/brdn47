@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BRDN | Discord Bot & Sunucu Kurulumu</title>
-  <meta name="description" content="BRDN — Discord bot geliştirme ve profesyonel sunucu kurulumu. İletişim: Discord." />
+  <title>BRDN | Discord Bot Geliştirme</title>
+  <meta name="description" content="BRDN — Sunucuna özel Discord bot geliştirme (kodlama). Komutlar, otomasyon, entegrasyon." />
 
-  <!-- Cache kırıcı (tarayıcı eski sürümü göstermesin) -->
+  <!-- Cache kırıcı -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
@@ -90,6 +90,7 @@
       background:linear-gradient(135deg, rgba(88,101,242,.95), rgba(6,182,212,.55));
       border-color:rgba(88,101,242,.65);
     }
+
     section{margin-top:16px}
     .panel{
       padding:18px;border-radius:var(--r);
@@ -108,8 +109,9 @@
     .card h3{margin:0 0 6px;font-size:15px}
     .card p{margin:0;color:var(--muted);line-height:1.6;font-size:14px}
     ul{margin:8px 0 0;padding-left:18px;color:var(--muted);line-height:1.9}
+
     label{display:block;font-weight:900;font-size:13px;color:rgba(255,255,255,.85);margin:10px 0 6px}
-    input, textarea{
+    input, textarea, select{
       width:100%;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.12);
@@ -119,8 +121,9 @@
       outline:none;
     }
     textarea{min-height:110px;resize:vertical}
-    input:focus, textarea:focus{border-color:rgba(88,101,242,.65)}
+    input:focus, textarea:focus, select:focus{border-color:rgba(88,101,242,.65)}
     .mini{font-size:12px;color:var(--muted);margin-top:8px}
+
     .copyBox{
       margin-top:12px;
       padding:12px;
@@ -150,7 +153,7 @@
   <div class="nav">
     <div class="brand">
       <div class="logo">BRDN</div>
-      <div>Discord Hizmet</div>
+      <div>Bot Geliştirme</div>
     </div>
     <div class="links">
       <a class="chip" href="#hizmet">Hizmet</a>
@@ -160,11 +163,12 @@
   </div>
 
   <header class="hero">
-    <div class="kicker">⚡ Özel bot • Profesyonel kurulum • Temiz & güvenli yapı</div>
-    <h1>Discord Bot & Sunucu Kurulumu</h1>
+    <div class="kicker">⚡ Sunucuna özel • Kodlama • Stabil & temiz sistem</div>
+    <h1>Discord Bot Geliştirme</h1>
     <p class="sub">
-      Sunucuna özel bot geliştirme ve düzenli sunucu mimarisi kuruyorum.
-      Bu sayfada fiyat yok — ihtiyacını Discord’dan yaz, ben kapsamı netleştirip dönüş yapayım.
+      Sunucuna/işine özel Discord bot geliştiriyorum. Hazır bot satmıyorum.
+      İstediğin komutlar, otomasyonlar ve entegrasyonlar ihtiyacına göre kodlanır.
+      (Bu sayfada fiyat yok.)
     </p>
 
     <div class="cta">
@@ -177,23 +181,31 @@
 
   <section id="hizmet">
     <div class="panel">
-      <h2 class="title">Neler Yapıyorum?</h2>
+      <h2 class="title">Neler Kodluyorum?</h2>
       <div class="grid">
         <div class="card">
-          <h3>Özel Discord Bot</h3>
-          <p>Sunucuya özel komutlar, otomasyonlar, buton/menü sistemleri ve istek bazlı modüller.</p>
+          <h3>Slash Komutlar & Paneller</h3>
+          <p>Discord slash komutları, buton/menü panelleri, kullanıcı dostu akış.</p>
         </div>
         <div class="card">
-          <h3>Sunucu Kurulumu</h3>
-          <p>Kanal/kategori düzeni, rol hiyerarşisi, izinler, kurallar ve onboarding.</p>
+          <h3>Otomasyon & Rol Sistemleri</h3>
+          <p>Otomatik rol verme, kayıt akışı, belirli kurallara göre otomatik işlemler.</p>
         </div>
         <div class="card">
-          <h3>Moderasyon & Güvenlik</h3>
-          <p>Anti-raid, spam/mention koruması, filtreler, log kanalları ve güvenli ayarlar.</p>
+          <h3>Moderasyon Komutları</h3>
+          <p>Uyarı/timeout/ban, filtreler, loglama ve yönetim araçları.</p>
         </div>
         <div class="card">
-          <h3>Ticket & Destek</h3>
-          <p>Butonlu ticket, departman bazlı destek, transcript/kayıt ve düzenli destek akışı.</p>
+          <h3>Ticket / Destek Botu (Kodlama)</h3>
+          <p>İstersen tamamen özel ticket sistemi yazarım (panel, transcript, yetki akışı).</p>
+        </div>
+        <div class="card">
+          <h3>Veritabanı & Seviye Sistemi</h3>
+          <p>XP/level, ekonomi, kullanıcı verisi kayıtları (MongoDB/SQLite vb.).</p>
+        </div>
+        <div class="card">
+          <h3>API Entegrasyonları</h3>
+          <p>Web API’leri, log/istatistik, dış servis bağlantıları (isteğe göre).</p>
         </div>
       </div>
     </div>
@@ -203,9 +215,9 @@
     <div class="panel">
       <h2 class="title">Süreç</h2>
       <ul>
-        <li>Sen ihtiyaçları yazarsın (sunucu türü, üye sayısı, istediğin sistemler).</li>
-        <li>Ben kapsamı netleştiririm (ne kurulacak / ne geliştirilecek).</li>
-        <li>Kurulum / test / teslim.</li>
+        <li>Sen ihtiyaçları yazarsın (hangi komutlar/sistemler, sunucu türü, hedef).</li>
+        <li>Ben kapsamı netleştiririm (ne yapılacak, nasıl çalışacak).</li>
+        <li>Kodlama → test → teslim.</li>
         <li>Gerekirse düzenleme ve destek.</li>
       </ul>
     </div>
@@ -215,20 +227,18 @@
     <div class="panel">
       <h2 class="title">İletişim</h2>
       <p class="sub" style="margin:0 0 12px;">
-        Aşağıdaki form sadece mesajını hazırlamak için. Göndermez. Hazır mesajı kopyalayıp Discord’dan atarsın.
+        Aşağıdaki form sadece mesajını hazırlamak için. Göndermez.
+        Mesajı kopyalayıp Discord’dan bana atarsın.
       </p>
 
-      <label>Sunucu türü</label>
-      <input id="type" placeholder="Topluluk / Oyun / Satış / E-spor" />
+      <label>Bot amacı</label>
+      <input id="purpose" placeholder="Örn: moderasyon, ticket, seviye, çekiliş, kayıt..." />
 
-      <label>Üye sayısı</label>
-      <input id="members" placeholder="Örn: 250 / 1000 / 5000" />
+      <label>İstediğin özellikler</label>
+      <textarea id="features" placeholder="Komutlar, paneller, loglar, veritabanı, özel kurallar..."></textarea>
 
-      <label>İstediğin sistemler</label>
-      <input id="systems" placeholder="ticket, log, moderasyon, kayıt, özel komutlar..." />
-
-      <label>Ek not</label>
-      <textarea id="note" placeholder="Kısaca detay yaz..."></textarea>
+      <label>Sunucu büyüklüğü</label>
+      <input id="size" placeholder="Örn: 200 / 1000 / 5000" />
 
       <div class="cta" style="margin-top:12px">
         <button class="btn primary" id="makeMsg">Mesaj oluştur</button>
@@ -243,7 +253,7 @@
 
   <div class="footer">
     <div class="pill">© <span id="year"></span> BRDN</div>
-    <div class="pill">Discord Bot & Sunucu Hizmetleri</div>
+    <div class="pill">Discord Bot Geliştirme</div>
   </div>
 
 </div>
@@ -252,10 +262,10 @@
   document.getElementById("year").textContent = new Date().getFullYear();
 
   const quickText =
-`Selam BRDN! Sunucum için bot/kurulum istiyorum.
-Sunucu türü: ...
-Üye sayısı: ...
-İstediğim sistemler: ...
+`Selam BRDN! Sunucum için özel bot geliştirme istiyorum.
+Bot amacı: ...
+İstediğim özellikler: ...
+Sunucu büyüklüğü: ...
 Not: ...`;
 
   const dmBox = document.getElementById("dmBox");
@@ -275,18 +285,16 @@ Not: ...`;
   const copyBtn = document.getElementById("copyMsg");
 
   document.getElementById("makeMsg").addEventListener("click", () => {
-    const type = document.getElementById("type").value.trim() || "-";
-    const members = document.getElementById("members").value.trim() || "-";
-    const systems = document.getElementById("systems").value.trim() || "-";
-    const note = document.getElementById("note").value.trim() || "-";
+    const p = document.getElementById("purpose").value.trim() || "-";
+    const f = document.getElementById("features").value.trim() || "-";
+    const s = document.getElementById("size").value.trim() || "-";
 
     const text =
-`Selam BRDN! Sunucum için bot/kurulum istiyorum.
+`Selam BRDN! Sunucum için özel bot geliştirme istiyorum.
 
-Sunucu türü: ${type}
-Üye sayısı: ${members}
-İstediğim sistemler: ${systems}
-Ek not: ${note}`;
+Bot amacı: ${p}
+İstediğim özellikler: ${f}
+Sunucu büyüklüğü: ${s}`;
 
     outBox.style.display = "block";
     outBox.textContent = text;
@@ -307,3 +315,4 @@ Ek not: ${note}`;
 </script>
 </body>
 </html>
+
