@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BRDN | Discord Bot Geliştirme</title>
-  <meta name="description" content="BRDN — Sunucuna özel Discord bot geliştirme (kodlama)." />
+  <meta name="description" content="BRDN — Sunucuna özel Discord bot geliştirme (kodlama). Özel komutlar, otomasyon, veritabanı, entegrasyon." />
 
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
   <meta http-equiv="Pragma" content="no-cache"/>
@@ -12,111 +12,322 @@
 
   <style>
     :root{
-      --bg:#06060a;
-      --bg2:#0b0b12;
-      --panel:#0f0f18;
-      --text:#f2f2f4;
+      --bg:#07070c;
+      --bg2:#0b0b14;
+      --panel:rgba(18,18,33,.62);
+      --panel2:rgba(15,15,24,.55);
+      --text:#f3f4f6;
       --muted:#b6b6c3;
       --gold:#d6b25e;
-      --border:rgba(214,178,94,.20);
+      --gold2:#f1d38a;
+      --border:rgba(214,178,94,.22);
+      --border2:rgba(255,255,255,.10);
       --shadow:0 18px 60px rgba(0,0,0,.65);
-      --r:18px;
+      --r:20px;
     }
 
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:system-ui,Segoe UI,Roboto,Arial;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
-      background:linear-gradient(180deg,var(--bg),var(--bg2));
+      background:
+        radial-gradient(1000px 520px at 12% 0%, rgba(214,178,94,.11), transparent 55%),
+        radial-gradient(900px 520px at 88% 10%, rgba(140,110,255,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
       min-height:100vh;
     }
 
-    .wrap{max-width:980px;margin:auto;padding:20px}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:20px}
 
+    /* NAV */
     .nav{
       display:flex;
-      justify-content:space-between;
       align-items:center;
-      padding:12px 16px;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
       border:1px solid var(--border);
       border-radius:999px;
-      background:rgba(18,18,33,.6);
+      background:rgba(18,18,33,.55);
+      backdrop-filter: blur(10px);
       box-shadow:var(--shadow);
+      position:sticky;
+      top:12px;
+      z-index:20;
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:10px;
-      font-weight:900;
+      gap:12px;
+      min-width:220px;
     }
 
+    /* LOGO FIX + OKUNURLUK GARANTİ */
     .logo-wrap{
-      width:42px;
-      height:42px;
+      width:44px;
+      height:44px;
+      border-radius:50%;
       display:flex;
       align-items:center;
       justify-content:center;
       flex-shrink:0;
+      background: radial-gradient(circle at 30% 30%, rgba(214,178,94,.18), transparent 60%);
+      box-shadow: 0 0 0 6px rgba(214,178,94,.08);
     }
-
     .logo-wrap img{
       width:100%;
       height:100%;
       object-fit:contain;
       border-radius:50%;
       display:block;
+      box-shadow:none;
     }
 
-    .links a{
-      margin-left:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+      gap:3px;
+    }
+    .brand-text .name{
+      font-weight:950;
+      letter-spacing:1px;
+      font-size:15px;
+      background:linear-gradient(135deg, var(--gold), var(--gold2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .brand-text .tag{
+      font-size:12px;
       color:var(--muted);
-      font-size:13px;
-      text-decoration:none;
+      font-weight:800;
+      letter-spacing:.2px;
     }
 
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .chip{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--border2);
+      background:rgba(0,0,0,.18);
+      color:var(--muted);
+      font-weight:900;
+      font-size:13px;
+      transition:.18s ease;
+    }
+    .chip:hover{
+      border-color:rgba(214,178,94,.35);
+      color:var(--text);
+      transform:translateY(-1px);
+    }
+
+    /* SECTIONS */
     .hero{
-      margin-top:20px;
-      padding:28px;
+      margin-top:16px;
+      padding:30px;
       border-radius:var(--r);
       border:1px solid var(--border);
-      background:rgba(15,15,24,.6);
+      background:linear-gradient(180deg, rgba(18,18,33,.72), rgba(15,15,24,.38));
       box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:after{
+      content:"";
+      position:absolute;
+      inset:-120px -150px auto auto;
+      width:360px;
+      height:360px;
+      background:radial-gradient(circle at 30% 30%, rgba(214,178,94,.22), transparent 62%);
+      transform:rotate(12deg);
+      pointer-events:none;
+      filter:blur(1px);
+    }
+    .kicker{
+      color:var(--muted);
+      font-weight:900;
+      letter-spacing:.3px;
+      font-size:13px;
+    }
+    h1{
+      margin:10px 0 10px;
+      font-size:40px;
+      line-height:1.08;
+    }
+    .sub{
+      margin:0;
+      max-width:820px;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:15px;
     }
 
-    h1{margin:10px 0;font-size:34px}
-    .sub{color:var(--muted);line-height:1.7}
+    .cta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+      font-weight:950;
+      cursor:pointer;
+      user-select:none;
+      transition:.15s ease;
+    }
+    .btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(214,178,94,.35);
+    }
+    .btn.primary{
+      background:linear-gradient(135deg, rgba(214,178,94,.98), rgba(241,211,138,.55));
+      border-color:rgba(214,178,94,.58);
+      color:#251b08;
+    }
 
     .panel{
-      margin-top:18px;
+      margin-top:16px;
       padding:18px;
       border-radius:var(--r);
-      border:1px solid rgba(255,255,255,.1);
-      background:rgba(15,15,24,.6);
+      border:1px solid var(--border2);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+    .title{
+      margin:0 0 10px;
+      font-size:18px;
+      font-weight:950;
+      letter-spacing:.2px;
     }
 
     .grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      grid-template-columns:repeat(12, 1fr);
       gap:12px;
     }
-
     .card{
+      grid-column:span 6;
       padding:14px;
-      border-radius:14px;
-      border:1px solid rgba(214,178,94,.2);
+      border-radius:16px;
+      border:1px solid rgba(214,178,94,.18);
+      background:linear-gradient(180deg, rgba(18,18,33,.55), rgba(0,0,0,.12));
+      transition:.18s ease;
+    }
+    .card:hover{
+      transform:translateY(-1px);
+      border-color:rgba(214,178,94,.35);
+    }
+    .card h3{
+      margin:0 0 6px;
+      font-size:15px;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
     }
 
-    footer{
-      margin-top:20px;
+    /* 3 ADVANTAGES */
+    .mini-grid .card{ grid-column:span 4; }
+
+    /* CONTACT */
+    label{
+      display:block;
+      font-weight:950;
+      font-size:13px;
+      color:rgba(255,255,255,.9);
+      margin:10px 0 6px;
+    }
+    input, textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+      padding:12px;
+      outline:none;
+    }
+    textarea{min-height:110px;resize:vertical}
+    input:focus, textarea:focus{border-color:rgba(214,178,94,.55)}
+
+    .copyBox{
+      display:none;
+      margin-top:12px;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(214,178,94,.22);
+      background:rgba(0,0,0,.20);
+      white-space:pre-wrap;
+      color:rgba(255,255,255,.92);
+    }
+    .mini{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:8px;
+    }
+
+    details{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.12);
+      border-radius:14px;
+      padding:12px 14px;
+      margin-top:10px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:950;
+      color:rgba(255,255,255,.92);
+    }
+    details p{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .footer{
+      margin:18px 0 6px;
       display:flex;
       justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
       color:var(--muted);
       font-size:13px;
+    }
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.14);
+    }
+
+    @media (max-width:900px){
+      h1{font-size:34px}
+      .mini-grid .card{ grid-column:span 12; }
+    }
+    @media (max-width:720px){
+      .card{grid-column:span 12;}
+      .brand{min-width:auto}
     }
   </style>
 </head>
@@ -129,47 +340,212 @@
       <div class="logo-wrap">
         <img src="logo.png" alt="BRDN Logo">
       </div>
-      <div>BRDN • Bot Geliştirme</div>
+      <div class="brand-text">
+        <div class="name">BRDN</div>
+        <div class="tag">Discord Bot Geliştirme</div>
+      </div>
     </div>
-    <div class="links">
-      <a href="#hizmet">Hizmet</a>
-      <a href="#iletisim">İletişim</a>
+
+    <div class="nav-links">
+      <a class="chip" href="#hizmet">Hizmet</a>
+      <a class="chip" href="#surec">Süreç</a>
+      <a class="chip" href="#faq">SSS</a>
+      <a class="chip" href="#iletisim">İletişim</a>
     </div>
   </div>
 
-  <div class="hero">
+  <!-- HERO -->
+  <header class="hero">
+    <div class="kicker">✨ Özel kodlama • Stabil sistem • Profesyonel görünüm</div>
     <h1>Discord Bot Geliştirme</h1>
     <p class="sub">
-      Sunucuna veya projene özel Discord bot geliştiriyorum.  
-      Hazır bot satışı yok, her şey ihtiyaca göre kodlanır.
+      Sunucuna veya projene özel Discord bot geliştiriyorum. Hazır bot satışı yok — her şey ihtiyaca göre kodlanır.
+      Bu sayfada fiyat yazmıyorum; isteklerini Discord’dan yaz, kapsamı netleştirip dönüş yapayım.
     </p>
-  </div>
 
-  <section id="hizmet" class="panel">
-    <h2>Neler Yapıyorum?</h2>
+    <div class="cta">
+      <a class="btn primary" href="https://discord.com/users/816990858515709962" target="_blank">Discord Profilim</a>
+      <button class="btn" id="copyQuick">Hazır mesajı kopyala</button>
+    </div>
+
+    <div class="copyBox" id="quickBox"></div>
+  </header>
+
+  <!-- 3 AVANTAJ -->
+  <section class="panel mini-grid">
+    <h2 class="title">Neden BRDN?</h2>
     <div class="grid">
-      <div class="card">Özel Discord Bot Kodlama</div>
-      <div class="card">Mevcut Bot Geliştirme</div>
-      <div class="card">Ticket / Level / Otomasyon</div>
-      <div class="card">Veritabanı & API Entegrasyonu</div>
+      <div class="card">
+        <h3>⚙️ Özel Kodlama</h3>
+        <p>İhtiyacına göre sıfırdan geliştirme. Sunucuna özel mantık ve akış.</p>
+      </div>
+      <div class="card">
+        <h3>🧪 Test & Teslim</h3>
+        <p>Komutlar ve akışlar test edilir, çalışır şekilde teslim edilir.</p>
+      </div>
+      <div class="card">
+        <h3>🔄 Destek Opsiyonu</h3>
+        <p>İsteğe bağlı bakım, güncelleme ve barındırma seçenekleri.</p>
+      </div>
     </div>
   </section>
 
-  <section id="iletisim" class="panel">
-    <h2>İletişim</h2>
-    <p class="sub">
-      Discord üzerinden iletişime geçebilirsin.
-    </p>
-    <a href="https://discord.com/users/816990858515709962" target="_blank">
-      Discord Profilim
-    </a>
+  <!-- HİZMET -->
+  <section id="hizmet" class="panel">
+    <h2 class="title">Neler Yapıyorum?</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Slash Komutlar & Paneller</h3>
+        <p>Buton/menü panelleri, modern slash komut akışları.</p>
+      </div>
+      <div class="card">
+        <h3>Otomasyon & Rol Sistemleri</h3>
+        <p>Kurallara göre otomatik rol/işlem, kayıt akışları.</p>
+      </div>
+      <div class="card">
+        <h3>Moderasyon & Log</h3>
+        <p>Timeout/ban, filtreler, log kanalları ve yönetim araçları.</p>
+      </div>
+      <div class="card">
+        <h3>Ticket / Level / Ekonomi</h3>
+        <p>İstersen tamamen özel ticket, seviye ve ekonomi sistemleri.</p>
+      </div>
+      <div class="card">
+        <h3>Veritabanı</h3>
+        <p>MongoDB / SQLite gibi veritabanı altyapısı ve kayıt sistemi.</p>
+      </div>
+      <div class="card">
+        <h3>API Entegrasyonları</h3>
+        <p>Dış servis bağlantıları, webhook, özel entegrasyonlar.</p>
+      </div>
+    </div>
   </section>
 
-  <footer>
-    <div>© 2025 BRDN</div>
-    <div>Premium Bot Development</div>
-  </footer>
+  <!-- SÜREÇ -->
+  <section id="surec" class="panel">
+    <h2 class="title">Süreç</h2>
+    <p class="sub" style="margin:0">
+      3 adımda ilerliyoruz: İhtiyaç → Kapsam → Kodlama & Teslim.
+    </p>
+    <div class="grid" style="margin-top:12px">
+      <div class="card">
+        <h3>1) İhtiyacı yaz</h3>
+        <p>Botun amacı, istediğin komutlar ve sistemler.</p>
+      </div>
+      <div class="card">
+        <h3>2) Kapsamı netleştirelim</h3>
+        <p>Ne yapılacak, nasıl çalışacak—netleştirilir.</p>
+      </div>
+      <div class="card" style="grid-column:span 12">
+        <h3>3) Kodlama → Test → Teslim</h3>
+        <p>Geliştirme sonrası test edilir ve çalışır şekilde teslim edilir. İstersen destek opsiyonu eklenir.</p>
+      </div>
+    </div>
+  </section>
 
+  <!-- FAQ -->
+  <section id="faq" class="panel">
+    <h2 class="title">Sık Sorulan Sorular</h2>
+    <details>
+      <summary>Hazır bot satıyor musun?</summary>
+      <p>Hayır. Her bot, sunucuya veya projeye özel olarak kodlanır.</p>
+    </details>
+    <details>
+      <summary>Fiyat neden yazmıyor?</summary>
+      <p>İhtiyaçlar farklı olduğu için kapsam netleştikten sonra fiyat belirlenir.</p>
+    </details>
+    <details>
+      <summary>Mevcut botu geliştirebilir misin?</summary>
+      <p>Evet. Hata düzeltme, yeni özellik ekleme ve performans iyileştirme yapabilirim.</p>
+    </details>
+  </section>
+
+  <!-- İLETİŞİM -->
+  <section id="iletisim" class="panel">
+    <h2 class="title">İletişim</h2>
+    <p class="sub" style="margin:0 0 12px;">
+      Aşağıdaki alanlar sadece mesajını hazırlamak için. “Mesaj oluştur” deyip kopyala, Discord’dan gönder.
+    </p>
+
+    <label>Bot amacı</label>
+    <input id="purpose" placeholder="Örn: moderasyon, ticket, seviye, ekonomi, kayıt..." />
+
+    <label>İstediğin özellikler</label>
+    <textarea id="features" placeholder="Komutlar, paneller, loglar, veritabanı, özel kurallar..."></textarea>
+
+    <label>Sunucu büyüklüğü</label>
+    <input id="size" placeholder="Örn: 200 / 1000 / 5000" />
+
+    <div class="cta" style="margin-top:12px">
+      <button class="btn primary" id="makeMsg">Mesaj oluştur</button>
+      <button class="btn" id="copyMsg" disabled>Kopyala</button>
+      <a class="btn" href="https://discord.com/users/816990858515709962" target="_blank">Discord’a git</a>
+    </div>
+
+    <div class="mini" id="status"></div>
+    <div class="copyBox" id="outBox"></div>
+  </section>
+
+  <div class="footer">
+    <div class="pill">© <span id="year"></span> BRDN</div>
+    <div class="pill">Premium Bot Development</div>
+  </div>
 </div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const quickText =
+`Selam BRDN! Özel Discord bot geliştirme istiyorum.
+Bot amacı: ...
+İstediğim özellikler: ...
+Sunucu büyüklüğü: ...
+Not: ...`;
+
+  const quickBox = document.getElementById("quickBox");
+  document.getElementById("copyQuick").addEventListener("click", async () => {
+    quickBox.style.display = "block";
+    quickBox.textContent = quickText;
+    try {
+      await navigator.clipboard.writeText(quickText);
+      alert("Hazır mesaj kopyalandı ✅");
+    } catch (e) {
+      alert("Kopyalama olmadı. Metni elle kopyalayabilirsin.");
+    }
+  });
+
+  const outBox = document.getElementById("outBox");
+  const status = document.getElementById("status");
+  const copyBtn = document.getElementById("copyMsg");
+
+  document.getElementById("makeMsg").addEventListener("click", () => {
+    const p = document.getElementById("purpose").value.trim() || "-";
+    const f = document.getElementById("features").value.trim() || "-";
+    const s = document.getElementById("size").value.trim() || "-";
+
+    const text =
+`Selam BRDN! Özel Discord bot geliştirme istiyorum.
+
+Bot amacı: ${p}
+İstediğim özellikler: ${f}
+Sunucu büyüklüğü: ${s}`;
+
+    outBox.style.display = "block";
+    outBox.textContent = text;
+    copyBtn.disabled = false;
+    status.textContent = "Mesaj hazır. Kopyalayıp Discord’dan gönderebilirsin.";
+  });
+
+  document.getElementById("copyMsg").addEventListener("click", async () => {
+    const text = outBox.textContent.trim();
+    if(!text) return;
+    try{
+      await navigator.clipboard.writeText(text);
+      status.textContent = "Kopyalandı ✅";
+    }catch(e){
+      status.textContent = "Kopyalanmadı. Metni elle kopyalayabilirsin.";
+    }
+  });
+</script>
 </body>
 </html>
