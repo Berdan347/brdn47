@@ -4,43 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BRDN | Discord Bot Geliştirme</title>
-  <meta name="description" content="BRDN — Sunucuna özel Discord bot geliştirme (kodlama). Komutlar, otomasyon, entegrasyon." />
+  <meta name="description" content="BRDN — Sunucuna özel Discord bot geliştirme (kodlama)." />
 
-  <!-- Cache kırıcı -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
-/* LOGO DÜZELTME */
-.logo-wrap{
-  width:42px;
-  height:42px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-}
-
-.logo-wrap img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  border-radius:50%;
-}
 
   <style>
-    /* ✅ LÜKS TEMA: Siyah + Altın + Hafif Mor Vurgu */
     :root{
-      --bg:#06060a;            /* ana arka plan */
-      --bg2:#0b0b12;           /* gradient ikinci ton */
-      --panel:#0f0f18;         /* kart/panel */
-      --panel2:#121221;        /* hover/ikinci panel */
-      --text:#f2f2f4;          /* yazı */
-      --muted:#b6b6c3;         /* ikincil yazı */
-      --gold:#d6b25e;          /* altın vurgu */
-      --gold2:#f1d38a;         /* altın parlak */
-      --accent:#7c3aed;        /* mor vurgu (çok az) */
+      --bg:#06060a;
+      --bg2:#0b0b12;
+      --panel:#0f0f18;
+      --text:#f2f2f4;
+      --muted:#b6b6c3;
+      --gold:#d6b25e;
       --border:rgba(214,178,94,.20);
-      --border2:rgba(255,255,255,.10);
       --shadow:0 18px 60px rgba(0,0,0,.65);
       --r:18px;
     }
@@ -48,159 +26,97 @@
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-family:system-ui,Segoe UI,Roboto,Arial;
       color:var(--text);
-      background:
-        radial-gradient(900px 450px at 18% 0%, rgba(214,178,94,.12), transparent 60%),
-        radial-gradient(700px 380px at 82% 10%, rgba(124,58,237,.10), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
+      background:linear-gradient(180deg,var(--bg),var(--bg2));
       min-height:100vh;
     }
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:980px;margin:0 auto;padding:20px}
+
+    .wrap{max-width:980px;margin:auto;padding:20px}
 
     .nav{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      padding:12px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 16px;
       border:1px solid var(--border);
       border-radius:999px;
-      background:rgba(18,18,33,.55);
-      backdrop-filter: blur(10px);
+      background:rgba(18,18,33,.6);
       box-shadow:var(--shadow);
-      position:sticky; top:12px; z-index:5;
     }
-    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.6px}
-    .logo{
-      width:36px;height:36px;border-radius:14px;
-      background:linear-gradient(135deg, var(--gold), var(--gold2));
-      display:grid;place-items:center;
-      box-shadow:0 0 0 6px rgba(214,178,94,.10);
-      font-size:13px;
-      color:#221a08;
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
     }
-    .links{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-    .chip{
-      padding:9px 11px;
-      border:1px solid rgba(255,255,255,.12);
+
+    .logo-wrap{
+      width:42px;
+      height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+    }
+
+    .logo-wrap img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      border-radius:50%;
+      display:block;
+    }
+
+    .links a{
+      margin-left:8px;
+      padding:8px 12px;
       border-radius:999px;
-      background:rgba(15,15,24,.35);
+      border:1px solid rgba(255,255,255,.12);
       color:var(--muted);
-      font-weight:800;
       font-size:13px;
-      transition:.2s;
-    }
-    .chip:hover{
-      color:var(--text);
-      border-color:rgba(214,178,94,.35);
-      transform:translateY(-1px);
+      text-decoration:none;
     }
 
     .hero{
-      margin-top:14px;
+      margin-top:20px;
       padding:28px;
       border-radius:var(--r);
-      border:1px solid rgba(214,178,94,.22);
-      background:linear-gradient(180deg, rgba(18,18,33,.75), rgba(18,18,33,.35));
+      border:1px solid var(--border);
+      background:rgba(15,15,24,.6);
       box-shadow:var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-    .hero:after{
-      content:"";
-      position:absolute; inset:-120px -140px auto auto;
-      width:340px;height:340px;
-      background:radial-gradient(circle at 30% 30%, rgba(214,178,94,.22), transparent 60%);
-      filter:blur(2px);
-      transform:rotate(12deg);
-      pointer-events:none;
     }
 
-    .kicker{color:var(--muted);font-weight:900;letter-spacing:.4px;font-size:13px}
-    h1{margin:10px 0 10px;font-size:36px;line-height:1.1}
-    .sub{margin:0;max-width:760px;color:var(--muted);line-height:1.75}
+    h1{margin:10px 0;font-size:34px}
+    .sub{color:var(--muted);line-height:1.7}
 
-    .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 14px;border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(15,15,24,.55);
-      color:var(--text); font-weight:900;
-      cursor:pointer; user-select:none;
-      transition:transform .08s ease, border-color .2s ease, background .2s ease;
-    }
-    .btn:hover{transform:translateY(-1px);border-color:rgba(214,178,94,.35)}
-    .btn.primary{
-      background:linear-gradient(135deg, rgba(214,178,94,.95), rgba(241,211,138,.55));
-      border-color:rgba(214,178,94,.55);
-      color:#241b08;
-    }
-
-    section{margin-top:16px}
     .panel{
-      padding:18px;border-radius:var(--r);
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(15,15,24,.55);
-      box-shadow:var(--shadow);
+      margin-top:18px;
+      padding:18px;
+      border-radius:var(--r);
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(15,15,24,.6);
     }
-    .title{margin:0 0 10px;font-size:18px}
 
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:12px;
+    }
+
     .card{
-      grid-column:span 6;
-      padding:14px;border-radius:16px;
-      border:1px solid rgba(214,178,94,.18);
-      background:linear-gradient(180deg, rgba(18,18,33,.55), rgba(15,15,24,.35));
-      transition:.2s;
-    }
-    .card:hover{
-      transform:translateY(-1px);
-      border-color:rgba(214,178,94,.35);
-    }
-    .card h3{margin:0 0 6px;font-size:15px}
-    .card p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
-
-    ul{margin:8px 0 0;padding-left:18px;color:var(--muted);line-height:1.95}
-
-    label{display:block;font-weight:900;font-size:13px;color:rgba(242,242,244,.85);margin:10px 0 6px}
-    input, textarea{
-      width:100%;
+      padding:14px;
       border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.25);
-      color:var(--text);
-      padding:12px;
-      outline:none;
-    }
-    textarea{min-height:110px;resize:vertical}
-    input:focus, textarea:focus{border-color:rgba(214,178,94,.55)}
-    .mini{font-size:12px;color:var(--muted);margin-top:8px}
-
-    .copyBox{
-      margin-top:12px;
-      padding:12px;
-      border-radius:14px;
-      border:1px solid rgba(214,178,94,.22);
-      background:rgba(0,0,0,.25);
-      color:rgba(255,255,255,.92);
-      white-space:pre-wrap;
-      display:none;
+      border:1px solid rgba(214,178,94,.2);
     }
 
-    .footer{
-      margin:16px 0 6px;
-      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    footer{
+      margin-top:20px;
+      display:flex;
+      justify-content:space-between;
       color:var(--muted);
-    }
-    .pill{
-      padding:8px 10px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(15,15,24,.35);
-    }
-
-    @media (max-width:720px){
-      h1{font-size:30px}
-      .card{grid-column:span 12}
+      font-size:13px;
     }
   </style>
 </head>
@@ -210,203 +126,50 @@
 
   <div class="nav">
     <div class="brand">
-<div class="logo-wrap">
-  <img src="logo.png" alt="BRDN Logo">
-</div>
-
-  width:34px;
-  height:34px;
-  object-fit:contain;
-  border-radius:10px;
-  box-shadow:none;
-  background:transparent;
-  display:block;
-"/>
-
-
-
-
+      <div class="logo-wrap">
+        <img src="logo.png" alt="BRDN Logo">
+      </div>
       <div>BRDN • Bot Geliştirme</div>
     </div>
     <div class="links">
-      <a class="chip" href="#hizmet">Hizmet</a>
-      <a class="chip" href="#surec">Süreç</a>
-      <a class="chip" href="#iletisim">İletişim</a>
+      <a href="#hizmet">Hizmet</a>
+      <a href="#iletisim">İletişim</a>
     </div>
   </div>
 
-  <header class="hero">
-    <div class="kicker">✨ Özel bot • Kodlama • Stabil & temiz sistem</div>
+  <div class="hero">
     <h1>Discord Bot Geliştirme</h1>
     <p class="sub">
-      Sunucuna/işine özel Discord bot geliştiriyorum. Hazır bot satmıyorum.
-      İstediğin komutlar, otomasyonlar ve entegrasyonlar ihtiyacına göre kodlanır.
-      (Bu sayfada fiyat yok.)
+      Sunucuna veya projene özel Discord bot geliştiriyorum.  
+      Hazır bot satışı yok, her şey ihtiyaca göre kodlanır.
     </p>
-
-    <div class="cta">
-      <a class="btn primary" href="https://discord.com/users/816990858515709962" target="_blank">Discord Profili</a>
-      <button class="btn" id="copyDm">Hazır mesajı kopyala</button>
-    </div>
-
-    <div class="copyBox" id="dmBox"></div>
-  </header>
-
-  <section id="hizmet">
-    <div class="panel">
-      <h2 class="title">Neler Kodluyorum?</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Slash Komutlar & Paneller</h3>
-          <p>Slash komut, buton/menü panelleri, kullanıcı dostu akışlar.</p>
-        </div>
-        <div class="card">
-          <h3>Otomasyon & Rol Akışları</h3>
-          <p>Kurallara göre otomatik rol/işlem, kayıt akışları, otomasyonlar.</p>
-        </div>
-        <div class="card">
-          <h3>Moderasyon Araçları</h3>
-          <p>Timeout/ban, filtreler, loglama ve yönetim komutları.</p>
-        </div>
-        <div class="card">
-          <h3>Ticket Sistemi (Kodlama)</h3>
-          <p>İstersen özel ticket sistemi yazarım (panel, transcript, yetki akışı).</p>
-        </div>
-        <div class="card">
-          <h3>Veritabanı & Level</h3>
-          <p>Kullanıcı verisi, XP/level, ekonomi, kayıtlar (MongoDB/SQLite vb.).</p>
-        </div>
-        <div class="card">
-          <h3>API Entegrasyonları</h3>
-          <p>Dış servis bağlantıları, istatistik, web API (isteğe göre).</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="surec">
-    <div class="panel">
-      <h2 class="title">Süreç</h2>
-      <ul>
-        <li>Sen ihtiyaçları yazarsın (hangi komutlar/sistemler, amaç).</li>
-        <li>Ben kapsamı netleştiririm (ne yapılacak, nasıl çalışacak).</li>
-        <li>Kodlama → test → teslim.</li>
-        <li>Gerekirse düzenleme ve destek.</li>
-      </ul>
-    </div>
-  </section>
-  <section>
-  <div class="panel">
-    <h2 class="title">Sık Sorulan Sorular</h2>
-
-    <details>
-      <summary>Hazır bot satıyor musun?</summary>
-      <p>Hayır. Her bot, sunucuya veya projeye özel olarak kodlanır.</p>
-    </details>
-
-    <details>
-      <summary>Fiyat neden yazmıyor?</summary>
-      <p>İhtiyaçlar farklı olduğu için fiyatlandırma kapsam belirlendikten sonra netleşir.</p>
-    </details>
-
-    <details>
-      <summary>Kodlama sonrası destek var mı?</summary>
-      <p>İhtiyaca göre bakım, güncelleme ve barındırma desteği sunulabilir.</p>
-    </details>
-
   </div>
-</section>
 
-
-  <section id="iletisim">
-    <div class="panel">
-      <h2 class="title">İletişim</h2>
-      <p class="sub" style="margin:0 0 12px;">
-        Aşağıdaki form sadece mesajını hazırlamak için. Göndermez.
-        Mesajı kopyalayıp Discord’dan bana atarsın.
-      </p>
-
-      <label>Bot amacı</label>
-      <input id="purpose" placeholder="Örn: moderasyon, ticket, seviye, çekiliş, kayıt..." />
-
-      <label>İstediğin özellikler</label>
-      <textarea id="features" placeholder="Komutlar, paneller, loglar, veritabanı, özel kurallar..."></textarea>
-
-      <label>Sunucu büyüklüğü</label>
-      <input id="size" placeholder="Örn: 200 / 1000 / 5000" />
-
-      <div class="cta" style="margin-top:12px">
-        <button class="btn primary" id="makeMsg">Mesaj oluştur</button>
-        <button class="btn" id="copyMsg" disabled>Kopyala</button>
-        <a class="btn" href="https://discord.com/users/816990858515709962" target="_blank">Discord’a git</a>
-      </div>
-
-      <div class="mini" id="status"></div>
-      <div class="copyBox" id="outBox"></div>
+  <section id="hizmet" class="panel">
+    <h2>Neler Yapıyorum?</h2>
+    <div class="grid">
+      <div class="card">Özel Discord Bot Kodlama</div>
+      <div class="card">Mevcut Bot Geliştirme</div>
+      <div class="card">Ticket / Level / Otomasyon</div>
+      <div class="card">Veritabanı & API Entegrasyonu</div>
     </div>
   </section>
 
-  <div class="footer">
-    <div class="pill">© <span id="year"></span> BRDN</div>
-    <div class="pill">Premium Bot Development</div>
-  </div>
+  <section id="iletisim" class="panel">
+    <h2>İletişim</h2>
+    <p class="sub">
+      Discord üzerinden iletişime geçebilirsin.
+    </p>
+    <a href="https://discord.com/users/816990858515709962" target="_blank">
+      Discord Profilim
+    </a>
+  </section>
+
+  <footer>
+    <div>© 2025 BRDN</div>
+    <div>Premium Bot Development</div>
+  </footer>
 
 </div>
-
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  const quickText =
-`Selam BRDN! Özel Discord bot geliştirme istiyorum.
-Bot amacı: ...
-İstediğim özellikler: ...
-Sunucu büyüklüğü: ...
-Not: ...`;
-
-  const dmBox = document.getElementById("dmBox");
-  document.getElementById("copyDm").addEventListener("click", async () => {
-    dmBox.style.display = "block";
-    dmBox.textContent = quickText;
-    try{
-      await navigator.clipboard.writeText(quickText);
-      alert("Hazır mesaj kopyalandı ✅");
-    }catch(e){
-      alert("Kopyalama olmadı. Metni elle kopyalayabilirsin.");
-    }
-  });
-
-  const outBox = document.getElementById("outBox");
-  const status = document.getElementById("status");
-  const copyBtn = document.getElementById("copyMsg");
-
-  document.getElementById("makeMsg").addEventListener("click", () => {
-    const p = document.getElementById("purpose").value.trim() || "-";
-    const f = document.getElementById("features").value.trim() || "-";
-    const s = document.getElementById("size").value.trim() || "-";
-
-    const text =
-`Selam BRDN! Özel Discord bot geliştirme istiyorum.
-
-Bot amacı: ${p}
-İstediğim özellikler: ${f}
-Sunucu büyüklüğü: ${s}`;
-
-    outBox.style.display = "block";
-    outBox.textContent = text;
-    copyBtn.disabled = false;
-    status.textContent = "Mesaj hazır. Kopyalayıp Discord’dan gönderebilirsin.";
-  });
-
-  document.getElementById("copyMsg").addEventListener("click", async () => {
-    const text = outBox.textContent.trim();
-    if(!text) return;
-    try{
-      await navigator.clipboard.writeText(text);
-      status.textContent = "Kopyalandı ✅";
-    }catch(e){
-      status.textContent = "Kopyalanmadı. Metni elle kopyalayabilirsin.";
-    }
-  });
-</script>
 </body>
 </html>
